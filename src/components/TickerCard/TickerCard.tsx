@@ -11,8 +11,6 @@
 
 import React, { useEffect, useState,FC } from 'react';
 
-import { Card, Row, Col } from 'antd';
-
 /* import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -43,12 +41,12 @@ const TickerCard: React.FC<TickerCardProps> = ({ ticker }) => {
    return (
 
 
-<div className="card">
-          <div className="card-content">
+
+        
             <div className="card-body">
               <div className="media d-flex">
                 <div className="align-self-center">
-			<h3>{ticker.name}</h3><img src={imgSrc} alt="{ticker.name}" className="img-fluid" height={35} width={35} />
+			<h3>{ticker.name}</h3><img src={imgSrc} alt={ticker.symbol} className="img-fluid" height={35} width={35} />
                 </div>
 
 
@@ -72,10 +70,9 @@ const TickerCard: React.FC<TickerCardProps> = ({ ticker }) => {
 
             </div>
 
-          </div>
 
           
-        </div>
+
 
 
 )};
@@ -108,31 +105,43 @@ const CryptoTicker = () => {
       {error}</div>;
 
     return (
-<Card>  
 
-      <Row>
+
+
+
+             <div className="grey-bg container-fluid">
+
+      <div className="row">
+               
+
           {tickers.map(ticker => (
 
-    <div className="grey-bg container-fluid">
-    <section id="minimal-statistics">
-      <div className="row">
-         
-      <div className="col-12 mt-3 mb-1">
-               
+
+<div className="col-4 mt-6 mb-1 col-xl-4 col-sm-5 ">
+   {/* col-6 mt-3 mb-1    col-xl-4 col-sm-5 col-6 */}
+<div className="card">
+     <div className="card-content">
+
                 <TickerCard key={ticker.id} ticker={ticker} />
-
+                </div>
+</div>
            
-      </div>
+       </div>
 
-    </div>
-</section>
-  </div>     
+  
 
  
- ))}
+ )
+ 
+  
+ 
+ )}
 
-</Row>
-</Card> 
+
+     </div>
+
+  </div> 
+
 
 
 

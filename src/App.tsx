@@ -10,10 +10,10 @@ function App() {
   return (
     <>
     
-      <div>
+      
         <TickerCard/>
-      </div>
-      <h1>Vite + React</h1>
+      
+{/*       <h1>Vite + React</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
@@ -24,7 +24,7 @@ function App() {
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
-      </p>
+      </p> */}
     </>
   )
 }
