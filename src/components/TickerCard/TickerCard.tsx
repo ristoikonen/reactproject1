@@ -7,7 +7,7 @@
  */
 
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, FC } from 'react';
 import Marquee from "react-fast-marquee";
 
 
@@ -54,11 +54,17 @@ const TickerCard: React.FC<TickerCardProps> = ({ ticker }) => {
             </div>
 )};
 
-const CryptoTicker = () => {
+interface ICryptoTickerState {
+      coinNumber : number,
+    }
+
+const CryptoTicker: React.FC<ICryptoTickerState> =  ({coinNumber}) => {
     const [tickers, setTickers] = useState<Ticker[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const showCoins = 6;
+    const DEFAULT_COIN_NUMBER = 6 ;
+
+    const showCoins: number = (coinNumber) < 1 ? DEFAULT_COIN_NUMBER : coinNumber;
 
     useEffect(() => {
         const fetchTickers = async () => {
