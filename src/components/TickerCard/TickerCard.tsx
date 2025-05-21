@@ -7,8 +7,12 @@
  */
 
 
-import React, { useEffect, useState, FC } from 'react';
+import React, { useEffect, useState } from 'react';
 import Marquee from "react-fast-marquee";
+import { Cloudinary } from "@cloudinary/url-gen";
+import { auto } from '@cloudinary/url-gen/actions/resize';
+import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
+import { AdvancedImage } from '@cloudinary/react';
 
 
 interface Ticker {
@@ -25,16 +29,26 @@ interface TickerCardProps {
     ticker: Ticker;
 }
 
+ // get currency symbol icon from my Cloudinary storage, icons need to be named as Cloudfare API's currency symbol name.
+let cld = new Cloudinary({ cloud: { cloudName: 'ddjpunfg4' } });
+
 const TickerCard: React.FC<TickerCardProps> = ({ ticker }) => {
-   const imgSrc = `/src/assets/${ticker.symbol}.png`;
-   const imgSize = 35;
+   //const imgSrc = `/src/assets/${ticker.symbol}.png`;
+   const imgSize = 38
+   const coinSymbol= ticker.symbol.toUpperCase() ?? 'BTC'; // Default to BTC if symbol is not available
+   const img = cld
+   .image(coinSymbol) 
+   .format('auto') 
+   .quality('auto')
+   .resize(auto().gravity(autoGravity()).width(imgSize).height(imgSize)); 
 
    return (
 
             <div className="card-body justify-content-between media d-flex">
-
                 <div className="text-start">
-			        <h3>{ticker.name}</h3><img src={imgSrc} alt={ticker.symbol} className="img-fluid" height={imgSize} width={imgSize} />
+			        <h3>{ticker.name}</h3>
+                    {/* <img src={img} alt={ticker.symbol} className="img-fluid" height={imgSize} width={imgSize} /> */}
+                    <AdvancedImage cldImg={img}/>
                 </div>
 
                 <div className="text-middle">
